@@ -6,24 +6,10 @@ use BigFish\PDF417\BarcodeData;
 
 class ImageRenderer extends AbstractRenderer
 {
-    /** Supported image formats and corresponding MIME types. */
-    protected $formats = [
-        'jpg' => 'image/jpeg',
-        'png' => 'image/png',
-        'gif' => 'image/gif',
-        'tif' => 'image/tiff',
-        'bmp' => 'image/bmp',
-        'data-url' => null,
-    ];
-
     protected $options = [
-        'format' => 'png',
-        'quality' => 90,
         'scale' => 3,
         'ratio' => 3,
         'padding' => 20,
-        'color' => "#000000",
-        'bgColor' => "#ffffff",
     ];
 
     /**
@@ -32,12 +18,6 @@ class ImageRenderer extends AbstractRenderer
     public function validateOptions()
     {
         $errors = [];
-
-        $format = $this->options['format'];
-        if (!array_key_exists($format, $this->formats)) {
-            $formats = implode(", ", array_keys($this->formats));
-            $errors[] = "Invalid option \"format\": \"$format\". Expected one of: $formats.";
-        }
 
         $scale = $this->options['scale'];
         if (!is_numeric($scale) || $scale < 1 || $scale > 20) {
@@ -54,29 +34,6 @@ class ImageRenderer extends AbstractRenderer
             $errors[] = "Invalid option \"padding\": \"$padding\". Expected an integer between 0 and 50.";
         }
 
-        $quality = $this->options['quality'];
-        if (!is_numeric($quality) || $quality < 0 || $quality > 100) {
-            $errors[] = "Invalid option \"quality\": \"$quality\". Expected an integer between 0 and 50.";
-        }
-
-        // Check colors by trying to parse them
-        $color = $this->options['color'];
-        $bgColor = $this->options['bgColor'];
-
-        $gdColor = new Color();
-
-        try {
-            $gdColor->parse($color);
-        } catch (\Exception $ex) {
-            $errors[] = "Invalid option \"color\": \"$color\". Supported color formats: \"#000000\", \"rgb(0,0,0)\", or \"rgba(0,0,0,0)\"";
-        }
-
-        try {
-            $gdColor->parse($bgColor);
-        } catch (\Exception $ex) {
-            $errors[] = "Invalid option \"bgColor\": \"$bgColor\". Supported color formats: \"#000000\", \"rgb(0,0,0)\", or \"rgba(0,0,0,0)\"";
-        }
-
         return $errors;
     }
 
@@ -85,8 +42,7 @@ class ImageRenderer extends AbstractRenderer
      */
     public function getContentType()
     {
-        $format = $this->options['format'];
-        return $this->formats[$format];
+        return 'image/png';
     }
 
     /**
@@ -101,11 +57,7 @@ class ImageRenderer extends AbstractRenderer
         $width = count($pixelGrid[0]);
 
         // Extract options
-        $bgColor = $this->options['bgColor'];
-        $color = $this->options['color'];
-        $format = $this->options['format'];
         $padding = $this->options['padding'];
-        $quality = $this->options['quality'];
         $ratio = $this->options['ratio'];
         $scale = $this->options['scale'];
 

@@ -15,7 +15,6 @@ class SvgRenderer extends AbstractRenderer
     protected $options = [
         'scale' => 3,
         'ratio' => 3,
-        'color' => "#000",
         'description' => null,
     ];
 
@@ -85,7 +84,6 @@ class SvgRenderer extends AbstractRenderer
         // Create the group
         $group = $doc->createElement("g");
         $group->setAttribute('id', 'barcode');
-        $group->setAttribute('fill', $options['color']);
         $group->setAttribute('stroke', 'none');
 
         // Add barcode elements to group
