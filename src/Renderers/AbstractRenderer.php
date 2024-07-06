@@ -30,7 +30,6 @@ abstract class AbstractRenderer implements RendererInterface
     /**
      * Validates the options, throws an Exception on failure.
      *
-     * @param  array $options
      * @return array An array of errors, empty if no errors.
      */
     public function validateOptions()
@@ -49,7 +48,7 @@ abstract class AbstractRenderer implements RendererInterface
      * Renders the barcode from the given data set.
      *
      * @param  BarcodeData $data  The barcode data.
-     * @return mixed              Output format depends on the renderer.
+     * @return string Rendered image blob.
      */
     public abstract function render(BarcodeData $data);
 

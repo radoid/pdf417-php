@@ -62,23 +62,23 @@ class ImageRenderer extends AbstractRenderer
         $scale = $this->options['scale'];
 
         // Create a new image
-		$image = imagecreate($width * $scale + 2*$padding, $height * $scale * $ratio + 2*$padding);
-		$white = imagecolorallocate($image, 255, 255, 255);
-		$black = imagecolorallocate($image, 0, 0, 0);
+        $image = imagecreate($width * $scale + 2*$padding, $height * $scale * $ratio + 2*$padding);
+        $white = imagecolorallocate($image, 255, 255, 255);
+        $black = imagecolorallocate($image, 0, 0, 0);
 
         // Render the barcode
         foreach ($pixelGrid as $y => $row) {
             foreach ($row as $x => $value) {
                 if ($value) {
-					imagefilledrectangle($image, $padding + $x * $scale, $padding + $y * $scale * $ratio, $padding + ($x + 1) * $scale - 1, $padding + ($y + 1) * $scale * $ratio - 1, $black);
+                    imagefilledrectangle($image, $padding + $x * $scale, $padding + $y * $scale * $ratio, $padding + ($x + 1) * $scale - 1, $padding + ($y + 1) * $scale * $ratio - 1, $black);
                 }
             }
         }
 
         // Output the image into blob
-		ob_start();
+        ob_start();
         imagepng($image);
-		$blob = ob_get_clean();
+        $blob = ob_get_clean();
 
         return $blob;
     }
