@@ -15,8 +15,7 @@
     "require": {
         "php": ">=5.4",
         "ext-gd": "*",
-        "ext-bcmath": "*",
-        "intervention/image": "~2.0"
+		"ext-bcmath": "*"
     },
     "require-dev": {
         "mockery/mockery": "@stable",

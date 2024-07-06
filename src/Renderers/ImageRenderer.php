@@ -3,10 +3,6 @@
 namespace BigFish\PDF417\Renderers;
 
 use BigFish\PDF417\BarcodeData;
-use BigFish\PDF417\RendererInterface;
-
-use Intervention\Image\ImageManager;
-use Intervention\Image\Gd\Color;
 
 class ImageRenderer extends AbstractRenderer
 {
@@ -96,7 +92,7 @@ class ImageRenderer extends AbstractRenderer
     /**
      * {@inheritdoc}
      *
-     * @return \Intervention\Image\Image
+     * @return string
      */
     public function render(BarcodeData $data)
     {
@@ -114,28 +110,24 @@ class ImageRenderer extends AbstractRenderer
         $scale = $this->options['scale'];
 
         // Create a new image
-        $manager = new ImageManager();
-        $img = $manager->canvas($width, $height, $bgColor);
+		$image = imagecreate($width * $scale + 2*$padding, $height * $scale * $ratio + 2*$padding);
+		$white = imagecolorallocate($image, 255, 255, 255);
+		$black = imagecolorallocate($image, 0, 0, 0);
 
         // Render the barcode
         foreach ($pixelGrid as $y => $row) {
             foreach ($row as $x => $value) {
                 if ($value) {
-                    $img->pixel($color, $x, $y);
+					imagefilledrectangle($image, $padding + $x * $scale, $padding + $y * $scale * $ratio, $padding + ($x + 1) * $scale - 1, $padding + ($y + 1) * $scale * $ratio - 1, $black);
                 }
             }
         }
 
-        // Apply scaling & aspect ratio
-        $width *= $scale;
-        $height *= $scale * $ratio;
-        $img->resize($width, $height);
+        // Output the image into blob
+		ob_start();
+        imagepng($image);
+		$blob = ob_get_clean();
 
-        // Add padding
-        $width += 2 * $padding;
-        $height += 2 * $padding;
-        $img->resizeCanvas($width, $height, 'center', false, $bgColor);
-
-        return $img->encode($format, $quality);
+        return $blob;
     }
 }

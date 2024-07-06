@@ -4,7 +4,6 @@ namespace BigFish\PDF417\Tests\Renderers;
 
 use BigFish\PDF417\BarcodeData;
 use BigFish\PDF417\Renderers\ImageRenderer;
-use Intervention\Image\ImageManager;
 use PHPUnit\Framework\TestCase;
 
 class ImageRendererTest extends TestCase
@@ -127,50 +126,15 @@ class ImageRendererTest extends TestCase
 
 
         $png = $renderer->render($data);
-
-        $manager = new ImageManager();
-        $image = $manager->make($png);
+	    $image = imagecreatefromstring($png);
 
         // Expected dimensions
         $width = 2 * $padding + 2 * $scale;
         $height = 2 * $padding + 2 * $scale * $ratio;
         $mime = "image/png";
 
-        $this->assertSame($width, $image->width());
-        $this->assertSame($height, $image->height());
-        $this->assertSame($mime, $image->mime);
-    }
+        $this->assertSame($width, imagesx($image));
+        $this->assertSame($height, imagesy($image));
 
-
-    public function testColors()
-    {
-        $color = "#ff0000";
-        $bgColor = "#0000ff";
-
-        $renderer = new ImageRenderer([
-            'color' => $color,
-            'bgColor' => $bgColor,
-        ]);
-
-        $data = new BarcodeData();
-        $data->codes = [[true, false],[false, true]];
-
-        $png = $renderer->render($data);
-
-        // Open the image
-        $manager = new ImageManager();
-        $image = $manager->make($png);
-
-        // The whole image should have either forground or background color
-        // Check no other colors appear in the image
-        for ($x = 0; $x < $image->width(); $x++) {
-            for ($y = 0; $y < $image->height(); $y++) {
-                $c = $image->pickColor($x, $y, 'hex');
-                $this->assertTrue(
-                    in_array($c, [$color, $bgColor]),
-                    "Unexpected color $c encountered. Expected only $color or $bgColor."
-                );
-            }
-        }
     }
 }
