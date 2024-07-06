@@ -52,4 +52,19 @@ abstract class AbstractRenderer implements RendererInterface
      * @return mixed              Output format depends on the renderer.
      */
     public abstract function render(BarcodeData $data);
+
+    /**
+     * Renders the barcode from the given data set.
+     *
+     * @param  BarcodeData $data  The barcode data.
+     * @return string Rendered image data URL.
+     */
+    public function renderDataUrl(BarcodeData $data)
+    {
+        $blob = $this->render($data);
+        $mime = $this->getContentType();
+        $url = "data:$mime;base64," . base64_encode($blob);
+
+        return $url;
+    }
 }

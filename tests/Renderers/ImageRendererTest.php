@@ -61,4 +61,14 @@ class ImageRendererTest extends TestCase
         $this->assertSame($height, imagesy($image));
 
     }
+
+    public function testRenderDataUrl()
+    {
+        $data = new BarcodeData();
+        $data->codes = [[true, false],[false, true]];
+        $renderer = new ImageRenderer();
+        $url = $renderer->renderDataUrl($data);
+
+        $this->assertStringStartsWith('data:image/png;base64,', $url);
+    }
 }

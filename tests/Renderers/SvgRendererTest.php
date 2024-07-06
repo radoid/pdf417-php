@@ -68,4 +68,14 @@ class SvgRendererTest extends TestCase
         $this->assertTrue(isset($xml->description));
         $this->assertSame($desc, strval($xml->description));
     }
+
+    public function testRenderDataUrl()
+    {
+        $data = new BarcodeData();
+        $data->codes = [[true, false],[false, true]];
+        $renderer = new SvgRenderer();
+        $url = $renderer->renderDataUrl($data);
+
+        $this->assertStringStartsWith('data:image/svg+xml;base64,', $url);
+    }
 }
