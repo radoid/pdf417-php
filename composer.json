@@ -13,12 +13,11 @@
         }
     },
     "require": {
-        "php": ">=5.4",
+        "php": ">=5.5",
         "ext-gd": "*",
-		"ext-bcmath": "*"
+        "ext-bcmath": "*"
     },
     "require-dev": {
-        "mockery/mockery": "@stable",
-        "phpunit/phpunit": "^4|^5"
+        "phpunit/phpunit": "^9"
     }
 }

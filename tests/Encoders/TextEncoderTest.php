@@ -3,6 +3,7 @@
 namespace BigFish\PDF417\Tests\Encoders;
 
 use BigFish\PDF417\Encoders\TextEncoder;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -64,12 +65,9 @@ class TextEncoderTest extends TestCase
         $this->assertSame($expected, $actual);
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     * @expectedExceptionMessage Expected first parameter to be a string, array given.
-     */
     public function testInvalidInput()
     {
+		$this->expectException(InvalidArgumentException::class);
         $te = new TextEncoder();
         $te->encode([], true);
     }

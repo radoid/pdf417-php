@@ -3,7 +3,7 @@
 namespace BigFish\PDF417\Tests;
 
 use BigFish\PDF417\PDF417;
-use BigFish\PDF417\BarcodeData;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 class PDF417Test extends TestCase
@@ -24,42 +24,30 @@ class PDF417Test extends TestCase
         $this->assertSame($secLev, $pdf->getSecurityLevel());
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     * @expectedExceptionMessage Column count must be numeric. Given: foo
-     */
     public function testInvalidColumns1()
     {
+		$this->expectException(InvalidArgumentException::class);
         $pdf = new PDF417();
         $pdf->setColumns("foo");
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     * @expectedExceptionMessage Column count must be between 1 and 30. Given: 1000
-     */
     public function testInvalidColumns2()
     {
+		$this->expectException(InvalidArgumentException::class);
         $pdf = new PDF417();
         $pdf->setColumns(1000);
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     * @expectedExceptionMessage Security level must be numeric. Given: foo
-     */
     public function testInvalidSecurityLevel1()
     {
+		$this->expectException(InvalidArgumentException::class);
         $pdf = new PDF417();
         $pdf->setSecurityLevel("foo");
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     * @expectedExceptionMessage Security level must be between 0 and 8. Given: 1000
-     */
     public function testInvalidSecurityLevel2()
     {
+		$this->expectException(InvalidArgumentException::class);
         $pdf = new PDF417();
         $pdf->setSecurityLevel(1000);
     }

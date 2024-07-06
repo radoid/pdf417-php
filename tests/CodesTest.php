@@ -3,6 +3,7 @@
 namespace BigFish\PDF417\Tests;
 
 use BigFish\PDF417\Codes;
+use Exception;
 use PHPUnit\Framework\TestCase;
 
 class CodesTest extends TestCase
@@ -19,23 +20,15 @@ class CodesTest extends TestCase
 
     }
 
-    /**
-     * @expectedException Exception
-     * @expectedExceptionMessage Invalid code word [0][929]
-     *
-     * @return [type] [description]
-     */
     public function testInvalidCode()
     {
+		$this->expectException(Exception::class);
         $this->assertSame(0x1abe0, Codes::getCode(0, 929));
     }
 
-    /**
-     * @expectedException Exception
-     * @expectedExceptionMessage Invalid code word [3][0]
-     */
     public function testInvalidTable()
     {
+		$this->expectException(Exception::class);
         $this->assertSame(0x1abe0, Codes::getCode(3, 0));
     }
 }

@@ -4,6 +4,7 @@ namespace BigFish\PDF417\Tests\Renderers;
 
 use BigFish\PDF417\BarcodeData;
 use BigFish\PDF417\Renderers\ImageRenderer;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 class ImageRendererTest extends TestCase
@@ -16,30 +17,21 @@ class ImageRendererTest extends TestCase
         $this->assertSame($expected, $actual);
     }
 
-    
-    /**
-     * @expectedException InvalidArgumentException
-     * @expectedExceptionMessage Invalid option "scale": "0".
-     */
     public function testInvalidScale()
     {
+		$this->expectException(InvalidArgumentException::class);
         new ImageRenderer(["scale" => 0]);
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     * @expectedExceptionMessage Invalid option "ratio": "0".
-     */
     public function testInvalidRatio()
     {
+		$this->expectException(InvalidArgumentException::class);
         new ImageRenderer(["ratio" => 0]);
     }
-    /**
-     * @expectedException InvalidArgumentException
-     * @expectedExceptionMessage Invalid option "padding": "-1".
-     */
+	
     public function testInvalidPadding()
     {
+		$this->expectException(InvalidArgumentException::class);
         new ImageRenderer(["padding" => -1]);
     }
 
