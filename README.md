@@ -1,27 +1,19 @@
 PDF 417 barcode generator
 =========================
 
-[![Latest Version](https://img.shields.io/packagist/v/bigfish/pdf417.svg?style=flat-square&label=stable)](https://packagist.org/packages/bigfish/pdf417)
-[![Total Downloads](https://img.shields.io/packagist/dt/bigfish/pdf417.svg?style=flat-square)](https://packagist.org/packages/bigfish/pdf417)
-[![License](https://img.shields.io/packagist/l/bigfish/pdf417.svg?style=flat-square)](https://packagist.org/packages/bigfish/pdf417)
-[![Author](https://img.shields.io/badge/author-%40ihabunek-blue.svg?style=flat-square)](https://twitter.com/ihabunek)
-
-This project is no longer maintained
-------------------------------------
-
-I have moved on from PHP and this project will no longer be updated. If you wish to continue the legacy, please fork the project.
-
-For a maintaned Python implementation check out [ihabunek/pdf417-py](https://github.com/ihabunek/pdf417-py/).
-
--- Ivan
+This is a fork of the [ihabunek/pdf417-php](https://github.com/ihabunek/pdf417-php/) library,
+having the Intervention Image library removed for simplicity.
+It now relies on the PHP native GD extension only.
+Unneeded configuration options are also removed:
+bitmap image types (other than PNG) and colors (other than black on white).
 
 Requirements
 ------------
 
 Requires the following components:
 
-* PHP >= 5.4
-* PHP extensions: bcmath, fileinfo, gd
+* PHP >= 5.5
+* PHP extensions: bcmath, gd
 
 Installation
 ------------
@@ -29,7 +21,7 @@ Installation
 Add it to your `composer.json` file:
 
 ```
-composer require bigfish/pdf417
+composer require radoid/pdf417
 ```
 
 Usage overview
@@ -38,9 +30,9 @@ Usage overview
 ```php
 require 'vendor/autoload.php';
 
-use BigFish\PDF417\PDF417;
-use BigFish\PDF417\Renderers\ImageRenderer;
-use BigFish\PDF417\Renderers\SvgRenderer;
+use Radoid\PDF417\PDF417;
+use Radoid\PDF417\Renderers\ImageRenderer;
+use Radoid\PDF417\Renderers\SvgRenderer;
 
 // Text to be encoded into the barcode
 $text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
@@ -52,86 +44,29 @@ $pdf417 = new PDF417();
 $data = $pdf417->encode($text);
 
 // Create a PNG image
-$renderer = new ImageRenderer([
-    'format' => 'png'
-]);
-
+$renderer = new ImageRenderer();
 $image = $renderer->render($data);
 
-// Create an SVG representation
-$renderer = new SvgRenderer([
-    'color' => 'black',
-]);
-
+// Create an SVG image
+$renderer = new SvgRenderer();
 $svg = $renderer->render($data);
+
+// Create a data URL
+$dataURL = $renderer->renderDataUrl($data);
+
+// Use custom options
+$options = [
+	'scale' => 3,
+	'ratio' => 2,
+	'padding' => 0,
+]
+$renderer = new ImageRenderer($options);
 ```
 
-ImageRenderer
--------------
+### Options available
 
-Renders the barcode to an image using [Intervention Image](http://image.intervention.io/)
-
-Render function returns an instance of `Intervention\Image\Image`.
-
-#### Options
-
-Option  | Default | Description
-------- | ------- | -----------
-format  | png     | Output format, one of: `jpg`, `png`, `gif`, `tif`, `bmp`, `data-url`
-quality | 90      | Jpeg encode quality (1-10)
-scale   | 3       | Scale of barcode elements (1-20)
-ratio   | 3       | Height to width ration of barcode elements (1-10)
-padding | 20      | Padding in pixels (0-50)
-color   | #000000 | Foreground color as a hex code
-bgColor | #ffffff | Background color as a hex code
-
-#### Examples
-
-```php
-$pdf417 = new PDF417();
-$data = $pdf417->encode("My hovercraft is full of eels");
-
-// Create a PNG image, red on green background, extra big
-$renderer = new ImageRenderer([
-    'format' => 'png',
-    'color' => '#FF0000',
-    'bgColor' => '#00FF00',
-    'scale' => 10,
-]);
-
-$image = $renderer->render($data);
-$image->save('hovercraft.png');
-```
-
-The `data-url` format is not like the others, it returns a base64 encoded PNG
-image which can be used in an image `src` or in CSS. When you create an image
-using this format:
-
-```php
-$pdf417 = new PDF417();
-$data = $pdf417->encode('My nipples explode with delight');
-
-$renderer = new ImageRenderer([
-    'format' => 'data-url'
-]);
-$img = $renderer->render($data);
-```
-
-You can use it directly in your HTML or CSS code:
-
-```html
-<img src="<?= $img->encoded ?>" />
-```
-
-And this will be rendered as:
-```html
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA.... " />
-```
-
-Thanks
-------
-
-Without these pages, implementation of this project would have been much harder:
-
-* http://grandzebu.net/informatique/codbar-en/pdf417.htm
-* http://www.idautomation.com/barcode-faq/2d/pdf417/
+| Option    | Default | Description                                       |
+|-----------|---------|---------------------------------------------------|
+| `scale`   | 3       | Scale of barcode elements (1-20)                  |
+| `ratio`   | 3       | Height to width ration of barcode elements (1-10) |
+| `padding` | 20      | Padding in pixels (0-50)                          |

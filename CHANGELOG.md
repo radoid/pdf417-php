@@ -1,6 +1,14 @@
 PDF417 Changelog
 ================
 
+1.0.0 (2024-07-06)
+------------------
+
+* Removed Intervention/Image
+* Removed support for alternative bitmap formats and colors
+* Added `renderDataUrl()` method in ImageRenderer
+* `BigFish` namespace renamed to `Radoid` for differentiation
+
 0.3.0 (2017-07-29)
 ------------------
 
