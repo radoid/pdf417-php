@@ -1,9 +1,9 @@
 <?php
 
-namespace BigFish\PDF417\Tests\Renderers;
+namespace Radoid\PDF417\Tests\Renderers;
 
-use BigFish\PDF417\BarcodeData;
-use BigFish\PDF417\Renderers\JsonRenderer;
+use Radoid\PDF417\BarcodeData;
+use Radoid\PDF417\Renderers\JsonRenderer;
 use PHPUnit\Framework\TestCase;
 
 class JsonRendererTest extends TestCase

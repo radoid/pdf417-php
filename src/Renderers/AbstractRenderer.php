@@ -1,9 +1,9 @@
 <?php
 
-namespace BigFish\PDF417\Renderers;
+namespace Radoid\PDF417\Renderers;
 
-use BigFish\PDF417\BarcodeData;
-use BigFish\PDF417\RendererInterface;
+use Radoid\PDF417\BarcodeData;
+use Radoid\PDF417\RendererInterface;
 
 abstract class AbstractRenderer implements RendererInterface
 {

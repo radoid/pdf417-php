@@ -1,8 +1,8 @@
 <?php
 
-namespace BigFish\PDF417\Encoders;
+namespace Radoid\PDF417\Encoders;
 
-use BigFish\PDF417\EncoderInterface;
+use Radoid\PDF417\EncoderInterface;
 
 /**
  * Converts numbers to code words.

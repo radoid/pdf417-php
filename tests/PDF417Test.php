@@ -1,8 +1,8 @@
 <?php
 
-namespace BigFish\PDF417\Tests;
+namespace Radoid\PDF417\Tests;
 
-use BigFish\PDF417\PDF417;
+use Radoid\PDF417\PDF417;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
@@ -60,7 +60,7 @@ class PDF417Test extends TestCase
         $pdf = new PDF417();
         $barcodeData = $pdf->encode($data);
 
-        $this->assertInstanceOf("BigFish\\PDF417\\BarcodeData", $barcodeData);
+        $this->assertInstanceOf("Radoid\\PDF417\\BarcodeData", $barcodeData);
 
         $expectedCWs = [
             142, 227, 637, 601, 902, 130, 900, 865, 479, 227, 328, 765, 902, 1,

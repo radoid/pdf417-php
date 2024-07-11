@@ -1,6 +1,6 @@
 <?php
 
-namespace BigFish\PDF417;
+namespace Radoid\PDF417;
 
 interface EncoderInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace BigFish\PDF417;
+namespace Radoid\PDF417;
 
 /**
  * Encodes data into PDF417 code words.

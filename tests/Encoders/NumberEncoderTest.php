@@ -1,8 +1,8 @@
 <?php
 
-namespace BigFish\PDF417\Tests\Encoders;
+namespace Radoid\PDF417\Tests\Encoders;
 
-use BigFish\PDF417\Encoders\NumberEncoder;
+use Radoid\PDF417\Encoders\NumberEncoder;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace BigFish\PDF417\Tests;
+namespace Radoid\PDF417\Tests;
 
-use BigFish\PDF417\DataEncoder;
-use BigFish\PDF417\Encoders\TextEncoder;
-use BigFish\PDF417\Encoders\NumberEncoder;
-use BigFish\PDF417\Encoders\ByteEncoder;
+use Radoid\PDF417\DataEncoder;
+use Radoid\PDF417\Encoders\TextEncoder;
+use Radoid\PDF417\Encoders\NumberEncoder;
+use Radoid\PDF417\Encoders\ByteEncoder;
 use PHPUnit\Framework\TestCase;
 
 class DataEncoderTest extends TestCase

@@ -1,9 +1,9 @@
 <?php
 
-namespace BigFish\PDF417\Tests\Renderers;
+namespace Radoid\PDF417\Tests\Renderers;
 
-use BigFish\PDF417\BarcodeData;
-use BigFish\PDF417\Renderers\ImageRenderer;
+use Radoid\PDF417\BarcodeData;
+use Radoid\PDF417\Renderers\ImageRenderer;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 

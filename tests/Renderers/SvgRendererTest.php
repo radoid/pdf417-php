@@ -1,9 +1,9 @@
 <?php
 
-namespace BigFish\PDF417\Tests\Renderers;
+namespace Radoid\PDF417\Tests\Renderers;
 
-use BigFish\PDF417\BarcodeData;
-use BigFish\PDF417\Renderers\SvgRenderer;
+use Radoid\PDF417\BarcodeData;
+use Radoid\PDF417\Renderers\SvgRenderer;
 use PHPUnit\Framework\TestCase;
 
 class SvgRendererTest extends TestCase

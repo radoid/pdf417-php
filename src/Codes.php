@@ -1,6 +1,6 @@
 <?php
 
-namespace BigFish\PDF417;
+namespace Radoid\PDF417;
 
 /**
  * Converts high-level (base 929) code words into low-level code words (binary

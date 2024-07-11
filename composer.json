@@ -4,12 +4,12 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "BigFish\\PDF417\\": "src/"
+            "Radoid\\PDF417\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "BigFish\\PDF417\\Tests\\": "tests/"
+            "Radoid\\PDF417\\Tests\\": "tests/"
         }
     },
     "require": {

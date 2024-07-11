@@ -1,8 +1,8 @@
 <?php
 
-namespace BigFish\PDF417\Tests;
+namespace Radoid\PDF417\Tests;
 
-use BigFish\PDF417\ReedSolomon;
+use Radoid\PDF417\ReedSolomon;
 use PHPUnit\Framework\TestCase;
 
 class ReedSolomonTest extends TestCase

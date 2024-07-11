@@ -1,8 +1,8 @@
 <?php
 
-namespace BigFish\PDF417\Tests;
+namespace Radoid\PDF417\Tests;
 
-use BigFish\PDF417\Codes;
+use Radoid\PDF417\Codes;
 use Exception;
 use PHPUnit\Framework\TestCase;
 
